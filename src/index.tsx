@@ -7,7 +7,7 @@ import Today from "./components/today";
 import SpeedSelector from "./components/speed-selector";
 import Engine from "./engine";
 
-import "./styles.css";
+import "./styles.scss";
 
 const engine = new Engine();
 
