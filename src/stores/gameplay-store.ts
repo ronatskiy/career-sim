@@ -3,7 +3,7 @@ import AppStore from "./app-store";
 import Engine from "../engine";
 
 class GameplayStore {
-	public constructor(private readonly engine: Engine, private appStore: AppStore) {}
+	public constructor(private appStore: AppStore, private readonly engine: Engine) {}
 
 	public togglePause() {
 		this.engine.togglePause();

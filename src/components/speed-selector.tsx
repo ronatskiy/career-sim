@@ -1,6 +1,6 @@
 import React from "react";
 import { observer } from "mobx-react-lite";
-import useGameplayStore from "../stores/use-gameplay-store";
+import useGameplayStore from "../stores/hooks/use-gameplay-store";
 
 function SpeedSelector() {
 	const gameplay = useGameplayStore();

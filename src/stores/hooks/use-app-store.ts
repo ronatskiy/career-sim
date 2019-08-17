@@ -1,7 +1,7 @@
 import { useContext } from "react";
-import { useObserver } from "mobx-react-lite";
-import { storeContext } from "./index";
-import AppStore from "./app-store";
+
+import AppStore from "../app-store";
+import { storeContext } from "../../contexts/store-context";
 
 function useAppStore(): AppStore {
 	const store = useContext(storeContext);
@@ -10,7 +10,7 @@ function useAppStore(): AppStore {
 		throw new Error("You have forgot to use StoreProvider, shame on you.");
 	}
 
-	return useObserver(() => store);
+	return store;
 }
 
 export default useAppStore;

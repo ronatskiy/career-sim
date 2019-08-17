@@ -1,13 +1,8 @@
-import * as React from "react";
+import React from "react";
 import { useLocalStore } from "mobx-react-lite";
+import { createStore } from "../stores";
+import AppStore from "../stores/app-store";
 import Engine from "../engine";
-import AppStore from "./app-store";
-
-function createStore(engine: Engine) {
-	return {
-		app: new AppStore(engine),
-	};
-}
 
 export const storeContext = React.createContext<AppStore | null>(null);
 
@@ -19,5 +14,5 @@ interface Props {
 export const StoreProvider = ({ children, engine }: Props) => {
 	const store = useLocalStore(createStore, engine);
 
-	return <storeContext.Provider value={store.app}>{children}</storeContext.Provider>;
+	return <storeContext.Provider value={store.appStore}>{children}</storeContext.Provider>;
 };

@@ -1,17 +1,19 @@
-import * as React from "react";
+import React from "react";
 import { render } from "react-dom";
 
+import { StoreProvider } from "./contexts/store-context";
 import PlayButton from "./components/play-button";
 import Today from "./components/today";
 import SpeedSelector from "./components/speed-selector";
-import { StoreProvider } from "./stores";
 import Engine from "./engine";
 
 import "./styles.css";
 
+const engine = new Engine();
+
 function App() {
 	return (
-		<StoreProvider engine={new Engine()}>
+		<StoreProvider engine={engine}>
 			<div className="App">
 				<h1>Hello CodeSandbox</h1>
 				<h2>Start editing to see some magic happen!</h2>
@@ -23,6 +25,4 @@ function App() {
 	);
 }
 
-const rootElement = document.getElementById("root");
-
-render(<App />, rootElement);
+render(<App />, document.getElementById("root"));
