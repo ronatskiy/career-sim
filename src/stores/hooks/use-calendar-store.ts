@@ -5,6 +5,9 @@ function useCalendarStore() {
 	const gameplay = useGameplayStore();
 
 	return useObserver(() => ({
+		day: gameplay.calendar.day.dayOfMonth,
+		month: gameplay.calendar.month,
+		year: gameplay.calendar.year,
 		today: gameplay.calendar.day,
 	}));
 }

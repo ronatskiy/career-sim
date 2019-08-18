@@ -1,25 +1,20 @@
 import React from "react";
 import { render } from "react-dom";
+import "bootstrap/dist/css/bootstrap.css";
+import "./styles.scss";
 
 import { StoreProvider } from "./contexts/store-context";
-import PlayButton from "./components/play-button";
-import Today from "./components/today";
-import SpeedSelector from "./components/speed-selector";
+import Footer from "./components/footer";
 import Engine from "./engine";
-
-import "./styles.scss";
 
 const engine = new Engine();
 
 function App() {
 	return (
 		<StoreProvider engine={engine}>
-			<div className="App">
-				<h1>Hello CodeSandbox</h1>
-				<h2>Start editing to see some magic happen!</h2>
-				<PlayButton />
-				<Today />
-				<SpeedSelector />
+			<div className="app-layout">
+				<main className="app-layout__main" />
+				<Footer className="app-layout__footer" />
 			</div>
 		</StoreProvider>
 	);

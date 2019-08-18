@@ -1,0 +1,15 @@
+.app-layout {
+    display: flex;
+    flex-direction: column;    
+    justify-content: space-between;
+    height: 100vh;
+
+    &__main {
+        background-color: #E4F3FF;
+        flex-grow: 1;        
+    }
+
+    &__footer {
+        height: 2.5rem;
+    }
+}

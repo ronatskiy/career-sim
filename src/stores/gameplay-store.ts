@@ -1,4 +1,3 @@
-import { computed } from "mobx";
 import AppStore from "./app-store";
 import Engine from "../engine";
 
@@ -9,20 +8,19 @@ class GameplayStore {
 		this.engine.togglePause();
 	}
 
-	@computed
 	public get isGameActive() {
 		return !this.engine.isPaused;
 	}
 
-	get gameSpeed() {
+	public get gameSpeed() {
 		return this.engine.timer.gameSpeed;
 	}
 
-	changeSpeed = () => {
-		this.engine.timer.changeSpeed();
+	public changeSpeed = (newSpeed: number) => {
+		this.engine.timer.changeSpeed(newSpeed);
 	};
 
-	get calendar() {
+	public get calendar() {
 		return this.engine.calendar;
 	}
 }

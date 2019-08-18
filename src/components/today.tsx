@@ -5,7 +5,11 @@ import useCalendarStore from "../stores/hooks/use-calendar-store";
 function Today() {
 	const calendar = useCalendarStore();
 
-	return <div>Day # {calendar.today.dayOfMonth}</div>;
+	return (
+		<span>
+			{calendar.day}.{calendar.month}.{calendar.year}
+		</span>
+	);
 }
 
 export default observer(Today);

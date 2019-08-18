@@ -1,25 +1,23 @@
 import { observable, action } from "mobx";
 import Timer from "./timer";
 import Income from "../entities/income";
-import Day from "../entities/day";
-
-class CalendarModel {
-	public day: Day = new Day();
-
-	public changeDay() {
-		const { dayOfMonth } = this.day;
-
-		this.day.dayOfMonth = dayOfMonth < 28 ? dayOfMonth + 1 : 1;
-	}
-}
+import CalendarModel from "./calendar-model";
 
 class GameEngine {
+	public calendar: CalendarModel;
+	public timer: Timer;
+	@observable
+	private incomes: Array<Income> = [];
+
 	constructor() {
 		this.calendar = new CalendarModel();
 		this.timer = new Timer(() => {
-			console.log("tick at", new Date());
 			this.calendar.changeDay();
 		});
+	}
+
+	get isPaused() {
+		return this.timer.isPaused;
 	}
 
 	@action
@@ -27,28 +25,20 @@ class GameEngine {
 		this.incomes.push(income);
 	}
 
-	@observable
-	public isPaused: boolean = true;
-
-	public runGame() {}
+	public runGame() {
+		if (this.isPaused) {
+			this.timer.start();
+		}
+	}
 
 	@action
 	public togglePause() {
-		if (this.isPaused) {
+		if (this.timer.isPaused) {
 			this.timer.start();
 		} else {
 			this.timer.stop();
 		}
-
-		this.isPaused = !this.isPaused;
 	}
-
-	public calendar: CalendarModel;
-
-	@observable
-	private incomes: Array<Income> = [];
-
-	public timer: Timer;
 }
 
 export default GameEngine;
