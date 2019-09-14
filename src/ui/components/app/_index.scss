@@ -1,0 +1,42 @@
+.app-layout {
+    display: flex;
+    flex-direction: column;    
+    justify-content: space-between;
+    height: 100vh;
+
+    &__header {
+        background-color: #FFF0BC;
+        padding: 0;
+    }
+
+    &__main {
+        background-color: #E4F3FF;
+        flex-grow: 1;   
+    }
+
+    &__side-bar {
+        height: 100%;
+        padding: 0;            
+        width: 3.5rem;
+
+
+        &--left {
+            background-color: #0CC0A4;
+        }
+
+        &--right {
+            background-color: #3072C4;
+        }
+    }
+
+    &__footer {
+        margin-top: auto;
+        min-height: 2.5rem;
+    }
+}
+
+.game-field {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}

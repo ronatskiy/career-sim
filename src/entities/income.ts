@@ -1,3 +1,8 @@
-export default class Income {
-	public perDayIncome: number;
+interface Income {
+	income: number;
+	regularity: "PerDay" | "PerMonth" | "Once";
+	when: number; // day of month
+	description: string;
 }
+
+export default Income;

@@ -1,0 +1,19 @@
+.footer {
+    background-color: #E5E5E5;
+    
+    &__speed-selector {
+        flex-grow: 1;
+    }
+
+    &__finish-turn-button-container {
+        text-align: right;
+    }
+
+    &__finish-turn-button { }
+}
+
+.speed-selector {
+    .pagination {
+        margin: 0;
+    }
+}

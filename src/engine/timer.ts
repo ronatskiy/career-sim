@@ -12,8 +12,8 @@ class Timer {
 	public gameSpeed: number = 1;
 
 	@computed
-	public get isPaused() {
-		return this.mainLoopTimer === null;
+	public get isActive() {
+		return this.mainLoopTimer !== null;
 	}
 
 	@action

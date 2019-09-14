@@ -1,0 +1,8 @@
+.right-side-bar {
+    display: flex;
+    flex-direction: column;
+
+    &--turn-button {
+        margin-top: auto;
+    }
+}

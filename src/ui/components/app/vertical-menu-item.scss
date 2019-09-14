@@ -1,0 +1,14 @@
+.vertical-menu-item {
+    color: #000;
+    display: block;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    margin: 0.5rem;
+    padding: 0.5rem;
+
+    &--active,
+    &:hover {
+        border-color: #fff;
+        color: #fff;
+    }
+}

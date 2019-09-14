@@ -1,23 +1,28 @@
 import React from "react";
 import { render } from "react-dom";
-import "bootstrap/dist/css/bootstrap.css";
-import "./styles.scss";
+import { BrowserRouter as Router } from "react-router-dom";
+import "./vendors/index";
+import "./ui/styles.scss";
 
-import { StoreProvider } from "./contexts/store-context";
-import Footer from "./components/footer";
+import StorageService from "./services/storage-service";
+import { StoreProvider, App } from "./ui";
 import Engine from "./engine";
 
-const engine = new Engine();
+const storageService = new StorageService();
+const gameEngine = new Engine(storageService);
 
-function App() {
+function Root() {
 	return (
-		<StoreProvider engine={engine}>
-			<div className="app-layout">
-				<main className="app-layout__main" />
-				<Footer className="app-layout__footer" />
-			</div>
-		</StoreProvider>
+		<Router>
+			<StoreProvider engine={gameEngine}>
+				<App />
+			</StoreProvider>
+		</Router>
 	);
 }
 
-render(<App />, document.getElementById("root"));
+render(<Root />, document.getElementById("root"));
+
+window.addEventListener("beforeunload", () => {
+	gameEngine.exit();
+});
