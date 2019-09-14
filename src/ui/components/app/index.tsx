@@ -1,6 +1,7 @@
 import React from "react";
 import { Container, Col, Row } from "reactstrap";
 import { Route } from "react-router-dom";
+import { observer } from "mobx-react-lite";
 import Footer from "../footer";
 import LeftSideBar from "./left-side-bar";
 import RightSideBar from "./right-side-bar";
@@ -41,4 +42,4 @@ function App() {
 	);
 }
 
-export default App;
+export default observer(App);

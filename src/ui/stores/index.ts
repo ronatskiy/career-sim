@@ -1,4 +1,4 @@
-import Engine from "../engine";
+import Engine from "../../engine";
 import AppStore from "./app-store";
 
 export function createStore(engine: Engine) {

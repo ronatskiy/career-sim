@@ -1,4 +1,5 @@
 import React from "react";
+import { useObserver } from "mobx-react-lite";
 import useAppStore from "../../stores/hooks/use-app-store";
 
 const INCOME = "Доходы";
@@ -8,7 +9,7 @@ const ACCOUNT_BALANCE = "Баланс";
 function Balance() {
 	const appStore = useAppStore();
 
-	return (
+	return useObserver(() => (
 		<div>
 			<strong>{INCOME}</strong>
 			<div>
@@ -31,7 +32,7 @@ function Balance() {
 			<strong>{ACCOUNT_BALANCE}</strong>
 			<div />
 		</div>
-	);
+	));
 }
 
 export default Balance;

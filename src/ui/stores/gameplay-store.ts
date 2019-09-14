@@ -1,4 +1,4 @@
-import Engine from "../engine";
+import Engine from "../../engine";
 
 class GameplayStore {
 	public constructor(public readonly engine: Engine) {}

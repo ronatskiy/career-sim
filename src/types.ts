@@ -4,6 +4,7 @@ export interface GameState {
 	turn: number;
 	startDate: string;
 	salaryCount: number;
+	tasks: Task[];
 }
 
 export enum NotificationType {

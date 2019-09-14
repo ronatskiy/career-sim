@@ -15,7 +15,7 @@ class Task {
 }
 
 export class Goal {
-	constructor(public milestone: number, public isGoalAchived: () => boolean) {}
+	constructor(public milestone: number, public isGoalAchived?: () => boolean) {}
 }
 
 export default Task;

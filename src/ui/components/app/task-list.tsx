@@ -1,19 +1,22 @@
 import React from "react";
-import useAppStore from "../../stores/hooks/use-app-store";
+import useTasksStore from "../../stores/hooks/use-tasks-store";
+import { useObserver } from "mobx-react-lite";
 
 const ACTIVE_TASKS = "Активные задачи";
 
-export default function TaskList() {
-	const appStore = useAppStore();
+function TaskList() {
+	const tasksStore = useTasksStore();
 
-	return (
+	return useObserver(() => (
 		<>
 			<h4>{ACTIVE_TASKS}</h4>
-			{appStore.tasks.map((task, index) => (
+			{tasksStore.tasks.map((task, index) => (
 				<div>
 					{index + 1}. {task.title} - {!task.isDone && "не"} завершен
 				</div>
 			))}
 		</>
-	);
+	));
 }
+
+export default TaskList;

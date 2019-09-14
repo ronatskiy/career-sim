@@ -22,6 +22,7 @@ const defaultState: GameState = {
 	turn: 0,
 	startDate: "01.01.2020",
 	salaryCount: 0,
+	tasks: [],
 };
 
 class GameEngine {
@@ -41,11 +42,16 @@ class GameEngine {
 	public works: Array<Work> = [];
 
 	constructor(private readonly storageService: StorageService) {
-		const state = this.reloadStateAndInitTurnModel();
+		const state = this.loadGameState();
+
+		this.turnModel = new TurnModel(state.turn);
+		this.turnModel.addListener("onBeforeChange", () => {
+			this.saveState();
+		});
+
+		this.fromJs(state);
 
 		this.calendar = new CalendarModel(state.startDate, this.turnModel);
-		this.salaryCount = state.salaryCount;
-
 		this.setupChallenges();
 
 		this.properties = getProperties();
@@ -65,7 +71,9 @@ class GameEngine {
 	public startNewGame() {
 		if (this.turnModel.turn > 0) {
 			this.saveState(defaultState);
-			this.reloadStateAndInitTurnModel();
+			const js = this.storageService.loadGameState() || defaultState;
+
+			this.fromJs(js);
 		}
 	}
 
@@ -83,7 +91,7 @@ class GameEngine {
 	}
 
 	public exit() {
-		this.saveState();
+		this.saveState(this.toJs());
 	}
 
 	@action
@@ -91,31 +99,31 @@ class GameEngine {
 		this.tasks.push(task);
 	}
 
-	private getState(): GameState {
+	private toJs(): GameState {
 		return {
 			turn: this.turnModel.turn,
 			startDate: this.calendar.startDate,
 			salaryCount: this.salaryCount,
+			tasks: this.tasks,
 		};
 	}
 
-	private saveState(state?: GameState) {
-		this.storageService.saveGameState(state || this.getState());
+	@action
+	private fromJs(state: GameState) {
+		this.salaryCount = state.salaryCount;
+		this.turnModel.setTurn(state.turn);
+
+		for (let task of state.tasks) {
+			this.addTask(new Task(task.title, new Goal(task.goal.milestone)));
+		}
 	}
 
-	private reloadStateAndInitTurnModel() {
-		const state = this.storageService.loadGameState() || defaultState;
+	private saveState(state?: GameState) {
+		this.storageService.saveGameState(state || this.toJs());
+	}
 
-		if (!this.turnModel) {
-			this.turnModel = new TurnModel(state.turn);
-			this.turnModel.addListener("onBeforeChange", () => {
-				this.saveState();
-			});
-		} else {
-			this.turnModel.setTurn(state.turn);
-		}
-
-		return state;
+	private loadGameState(): GameState {
+		return this.storageService.loadGameState() || defaultState;
 	}
 
 	private setupChallenges() {

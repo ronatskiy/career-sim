@@ -1,13 +1,17 @@
 import { computed } from "mobx";
-import Engine from "../engine";
+
+import Engine from "../../engine";
+import Work from "../../entities/work";
 import GameplayStore from "./gameplay-store";
-import Work from "../entities/work";
+import TasksStore from "./tasks-store";
 
 class AppStore {
-	public gameplay: GameplayStore;
+	public readonly gameplay: GameplayStore;
+	public readonly tasksStore: TasksStore;
 
 	public constructor(private readonly engine: Engine) {
 		this.gameplay = new GameplayStore(engine);
+		this.tasksStore = new TasksStore(engine);
 
 		this.engine.turnModel.addListener("onAfterChange", this.checkChallenge);
 	}
@@ -28,16 +32,6 @@ class AppStore {
 			return {
 				text: property.type,
 				value: property.payments,
-			};
-		});
-	}
-
-	@computed
-	public get tasks() {
-		return this.engine.tasks.map(task => {
-			return {
-				title: task.title,
-				isDone: task.isDone(this.engine.turnModel.turn),
 			};
 		});
 	}
