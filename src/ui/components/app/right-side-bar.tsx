@@ -1,7 +1,7 @@
 import React from "react";
 import { Col } from "reactstrap";
 
-import VerticalMenuItem from "../vertical-menu/vertical-menu-item";
+import VerticalMenuItem from "./vertical-menu-item";
 import TurnButton from "./turn-button";
 import MeinMenuButton from "./main-menu-button";
 import "./right-side-bar.scss";
