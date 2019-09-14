@@ -7,6 +7,8 @@ import { ReactComponent as TaskListIcon } from "../../images/task-list.svg";
 import { ReactComponent as ManagerIcon } from "../../images/manager.svg";
 import { URL_ROUTES } from "../../routes";
 
+import "./vertical-menu-item.scss";
+
 export default function LeftSideBar() {
 	return (
 		<Col className="app-layout__side-bar app-layout__side-bar--left" xs="auto" sm="auto">
